@@ -27,9 +27,7 @@ adduser $USER gpio
 mkdir -p ~/.homebridge
 nano ~/.homebridge/config.json
 
- '~/.homebridge/config.json' SHOULD CONTAIN: 
-echo '
-{
+echo '{
     "bridge": {
         "name": "Homebridge",
         "username": "CC:22:3D:E3:CE:30",
@@ -52,3 +50,4 @@ echo '
     ]
 }
 ' > ~/.homebridge/config.json
+
