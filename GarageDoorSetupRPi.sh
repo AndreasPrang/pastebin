@@ -16,12 +16,12 @@ apt-get install -y git
 npm install -g homebridge
 
 # INSTALL PLUGIN 'homebridge-gpio'
-npm install -g homebridge-gpio
-git clone git://github.com/jamesblanksby/quick2wire-gpio-admin.git
-cd quick2wire-gpio-admin
-make
-make install
-adduser $USER gpio
+npm install -g homebridge-gardendoor
+#git clone git://github.com/jamesblanksby/quick2wire-gpio-admin.git
+#cd quick2wire-gpio-admin
+#make
+#make install
+#adduser $USER gpio
 
 # CREATE CONFIG FILE 
 mkdir -p ~/.homebridge
