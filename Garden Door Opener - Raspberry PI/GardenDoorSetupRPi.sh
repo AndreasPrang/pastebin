@@ -1,31 +1,33 @@
 #!/bin/bash
 
+if [[ $EUID -ne 0 ]]; then
+    echo "This script should be run using sudo or as the root user"
+    exit 1
+fi
+
 # BASIC INSTALLATION 
-sudo apt-get update
-sudo apt-get -y upgrade
+apt-get update
+apt-get -y upgrade
 curl -sL https://deb.nodesource.com/setup_4.x | bash -
-sudo apt-get install -y nodejs
-sudo apt-get install -y build-essential
-sudo apt-get install -y libavahi-compat-libdnssd-dev
-sudo apt-get install -y git
-sudo npm install -g homebridge
-# sudo npm install -g rpi-gpio
+apt-get install -y nodejs
+apt-get install -y build-essential
+apt-get install -y libavahi-compat-libdnssd-dev
+apt-get install -y git
+npm install -g homebridge
 
 # INSTALL PLUGIN 'homebridge-gpio'
-sudo npm install -g homebridge-gpio
-git clone git://github.com/jamesblanksby/quick2wire-gpio-admin.git
-cd quick2wire-gpio-admin
-make
-sudo make install
-sudo adduser $USER gpio
+npm install -g homebridge-gardendoor
+#git clone git://github.com/jamesblanksby/quick2wire-gpio-admin.git
+#cd quick2wire-gpio-admin
+#make
+#make install
+#adduser $USER gpio
 
 # CREATE CONFIG FILE 
 mkdir -p ~/.homebridge
 nano ~/.homebridge/config.json
 
- '~/.homebridge/config.json' SHOULD CONTAIN: 
-echo '
-{
+echo '{
     "bridge": {
         "name": "Homebridge",
         "username": "CC:22:3D:E3:CE:30",
@@ -48,3 +50,4 @@ echo '
     ]
 }
 ' > ~/.homebridge/config.json
+
