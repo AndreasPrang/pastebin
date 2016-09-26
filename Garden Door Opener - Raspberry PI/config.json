@@ -1,0 +1,22 @@
+{
+    "bridge": {
+        "name": "Homebridge",
+        "username": "CC:22:3D:E3:CE:30",
+        "port": 51826,
+        "pin": "031-45-154"
+    },
+
+    "description": "Config file for HomeBridge-GPIO",
+
+    "accessories": [
+        {
+                "accessory": "GPIO",
+                "name": "GPIO4",
+                "pin": 7,
+                "duration": 4000
+        }
+    ],
+
+    "platforms": [
+    ]
+}
