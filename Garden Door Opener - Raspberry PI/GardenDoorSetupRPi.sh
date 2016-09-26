@@ -1,53 +1,32 @@
 #!/bin/bash
 
-if [[ $EUID -ne 0 ]]; then
-    echo "This script should be run using sudo or as the root user"
-    exit 1
-fi
-
 # BASIC INSTALLATION 
-apt-get update
-apt-get -y upgrade
+sudo apt-get update
+sudo apt-get -y upgrade
 curl -sL https://deb.nodesource.com/setup_4.x | bash -
-apt-get install -y nodejs
-apt-get install -y build-essential
-apt-get install -y libavahi-compat-libdnssd-dev
-apt-get install -y git
-npm install -g homebridge
+sudo apt-get install -y nodejs
+sudo apt-get install -y build-essential
+sudo apt-get install -y libavahi-compat-libdnssd-dev
+sudo apt-get install -y git
+sudo npm install -g homebridge
+# sudo npm install -g rpi-gpio
 
 # INSTALL PLUGIN 'homebridge-gpio'
-npm install -g homebridge-gardendoor
-#git clone git://github.com/jamesblanksby/quick2wire-gpio-admin.git
-#cd quick2wire-gpio-admin
-#make
-#make install
-#adduser $USER gpio
+sudo npm install -g homebridge-gpio
+git clone git://github.com/jamesblanksby/quick2wire-gpio-admin.git
+cd quick2wire-gpio-admin
+make
+sudo make install
+sudo adduser $USER gpio
 
 # CREATE CONFIG FILE 
 mkdir -p ~/.homebridge
 nano ~/.homebridge/config.json
 
-echo '{
-    "bridge": {
-        "name": "Homebridge",
-        "username": "CC:22:3D:E3:CE:30",
-        "port": 51826,
-        "pin": "031-45-154"
-    },
 
-    "description": "Config file for HomeBridge-GPIO",
+curl sL https://raw.githubusercontent.com/AndreasPrang/pastebin/master/Garden%20Door%20Opener%20-%20Raspberry%20PI/config.json | echo > ~/.homebridge/config.json
 
-    "accessories": [
-        {
-                "accessory": "GPIO",
-                "name": "GPIO4",
-                "pin": 7,
-                "duration": 4000
-        }
-    ],
-
-    "platforms": [
-    ]
-}
-' > ~/.homebridge/config.json
-
+curl sL https://raw.githubusercontent.com/AndreasPrang/pastebin/master/Garden%20Door%20Opener%20-%20Raspberry%20PI/homebridge | echo > /etc/init.d/homebridge
+chmod 755 /etc/init.d/homebridge
+update-rc.d homebridge defaults
+service homebridge start
