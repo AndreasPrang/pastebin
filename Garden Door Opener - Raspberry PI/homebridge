@@ -16,7 +16,7 @@ start)
 if ps -p $PID > /dev/null 2>&1; then
         echo "Homebridge is already running"
 else
-        su - pi -c "homebridge > /dev/null 2>&1 &"
+        su -c "homebridge > /dev/null 2>&1 &"
         echo "Homebridge starting"
         $0 status
 fi
