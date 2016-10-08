@@ -26,7 +26,7 @@ nano ~/.homebridge/config.json
 
 curl -sL -o ~/.homebridge/config.json https://raw.githubusercontent.com/AndreasPrang/pastebin/master/Garden%20Door%20Opener%20-%20Raspberry%20PI/config.json
 
-curl -sL -o /etc/init.d/homebridge https://raw.githubusercontent.com/AndreasPrang/pastebin/master/Garden%20Door%20Opener%20-%20Raspberry%20PI/homebridge | echo > /etc/init.d/homebridge
+curl -sL -o /etc/init.d/homebridge https://raw.githubusercontent.com/AndreasPrang/pastebin/master/Garden%20Door%20Opener%20-%20Raspberry%20PI/homebridge
 chmod 755 /etc/init.d/homebridge
 update-rc.d homebridge defaults
 service homebridge start
